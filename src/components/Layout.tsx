@@ -1,5 +1,5 @@
 // src/components/Layout.tsx
-import { Box, Container, Flex } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Image } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 
 const HEADER_HEIGHT = "64px";
@@ -27,8 +27,15 @@ export const Layout = ({ children }: LayoutProps) => {
         alignItems="center"
         zIndex="sticky"
         boxShadow="sm"
+        gap={4}
       >
-        研修管理ポータル
+        <Image
+          src="/logo.svg"
+          alt="ロゴ"
+          boxSize="32px" // width/height 両方一気に指定
+          objectFit="contain" // はみ出し防止＆いい感じに収める
+        />
+        <Heading>研修管理ポータル</Heading>
       </Box>
 
       {/* メインコンテンツ */}
