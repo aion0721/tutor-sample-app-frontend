@@ -1,11 +1,11 @@
-import { Layout } from "./components/Layout";
+import { Routes, Route } from "react-router";
+import { Home } from "./pages/Home";
 
 function App() {
   return (
-    <Layout>
-      <p>ここが真ん中の自由スペースだよ✨</p>
-      <p>スクロールしてもHeader/Footerは動かないよ〜💃</p>
-    </Layout>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
 

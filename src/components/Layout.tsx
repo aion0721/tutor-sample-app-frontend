@@ -28,7 +28,7 @@ export const Layout = ({ children }: LayoutProps) => {
         zIndex="sticky"
         boxShadow="sm"
       >
-        固定Headerだよ💫
+        研修管理ポータル
       </Box>
 
       {/* メインコンテンツ */}
@@ -62,7 +62,7 @@ export const Layout = ({ children }: LayoutProps) => {
         zIndex="sticky"
         boxShadow="sm"
       >
-        固定Footerだよ🦋
+        aion all rights reservred.
       </Box>
     </>
   );
