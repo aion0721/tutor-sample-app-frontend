@@ -1,25 +1,38 @@
 // src/components/CardComponent.tsx
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Card, Tag } from "@chakra-ui/react";
+import type { CardData } from "@/types";
 
-type CardProps = {
-  title: string;
-  description: string;
+/* ★ カテゴリーごとに base / _dark の色を指定 */
+type Category = NonNullable<CardData["category"]>;
+
+const bgByCategory: Record<Category, { base: string; _dark: string }> = {
+  infra: { base: "blue.50", _dark: "blue.900" },
+  app: { base: "green.50", _dark: "green.900" },
+  business: { base: "yellow.50", _dark: "yellow.800" },
+  it: { base: "cyan.50", _dark: "cyan.900" },
+  other: { base: "gray.50", _dark: "gray.800" },
 };
 
-export const CardComponent = ({ title, description }: CardProps) => (
-  <Box
-    p={4}
-    borderRadius="md"
-    boxShadow="sm"
-    border="1px solid"
-    borderColor="gray.200"
-    w="200px"
-    h="160px"
-    _hover={{ boxShadow: "md" }}
-  >
-    <Heading as="h4" size="md" mb={2}>
-      {title}
-    </Heading>
-    <Text fontSize="sm">{description}</Text>
-  </Box>
+export const CardComponent = ({
+  title,
+  description,
+  category = "other",
+  tags = [],
+}: CardData) => (
+  <Card.Root bg={bgByCategory[category]} w="250px" h="160px">
+    <Card.Body>
+      <Card.Title>{title}</Card.Title>
+      <Card.Description>{description}</Card.Description>
+    </Card.Body>
+    {/* タグがあればフッターを描画 */}
+    {tags.length !== 0 && (
+      <Card.Footer>
+        {tags.map((tag) => (
+          <Tag.Root key={tag}>
+            <Tag.Label>{tag}</Tag.Label>
+          </Tag.Root>
+        ))}
+      </Card.Footer>
+    )}
+  </Card.Root>
 );

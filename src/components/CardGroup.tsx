@@ -10,7 +10,7 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { CardComponent } from "./Card";
 import type { CardData } from "@/types";
 
-const pageSize = 5;
+const pageSize = 4;
 
 type CardGroupProps = {
   items: CardData[];
