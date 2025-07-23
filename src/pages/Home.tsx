@@ -1,10 +1,9 @@
-// src/pages/Home.tsx
-import { Box, Heading, VStack } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
-import CardGroup from "@/components/CardGroup";
 import type { CardData } from "@/types";
 import { useEffect, useState } from "react";
 import { fetchNotifyData, fetchOpenData, fetchHistoryData } from "@/mocks/home";
+import { Section } from "@/components/Secrion";
 
 export const Home = () => {
   const [notify, setNotify] = useState<CardData[] | null>(null);
@@ -20,29 +19,9 @@ export const Home = () => {
   return (
     <Layout>
       <VStack align="stretch" gap={4}>
-        {/* お知らせ */}
-        <Box>
-          <Heading as="h2" size="lg" mb={4}>
-            お知らせ
-          </Heading>
-          <CardGroup items={notify} />
-        </Box>
-
-        {/* 募集中 */}
-        <Box>
-          <Heading as="h2" size="lg" mb={4}>
-            募集中
-          </Heading>
-          <CardGroup items={open} />
-        </Box>
-
-        {/* 受講済 */}
-        <Box>
-          <Heading as="h2" size="lg" mb={4}>
-            受講済
-          </Heading>
-          <CardGroup items={history} />
-        </Box>
+        <Section title="お知らせ" items={notify} />
+        <Section title="募集中" items={open} />
+        <Section title="受講済" items={history} />
       </VStack>
     </Layout>
   );
