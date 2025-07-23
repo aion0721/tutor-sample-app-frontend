@@ -11,13 +11,10 @@ import { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { CardComponent } from "./Card";
 import { TbCircleDotted } from "react-icons/tb";
+import type { CardData } from "@/types";
 
 const pageSize = 5;
 
-export type CardData = {
-  title: string;
-  description: string;
-};
 type SampleGridProps = {
   items: CardData[] | null;
 };

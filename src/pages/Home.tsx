@@ -1,8 +1,8 @@
 // src/pages/Home.tsx
-import { Box, Heading, VStack, Spinner, Center } from "@chakra-ui/react";
+import { Box, Heading, VStack } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
 import CardGroup from "@/components/CardGroup";
-import type { CardData } from "@/components/CardGroup";
+import type { CardData } from "@/types";
 import { useEffect, useState } from "react";
 import { fetchNotifyData, fetchOpenData, fetchHistoryData } from "@/mocks/home";
 

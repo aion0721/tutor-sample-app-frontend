@@ -1,4 +1,4 @@
-import type { CardData } from "@/components/CardGroup";
+import type { CardData } from "@/types";
 
 // モックデータ
 const notifyData: CardData[] = [
