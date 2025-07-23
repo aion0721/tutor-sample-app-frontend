@@ -1,28 +1,35 @@
-import type { StorybookConfig } from '@storybook/react-vite';
+// .storybook/main.ts
+import type { StorybookConfig } from "@storybook/react-vite";
+import { resolve } from "node:path";
 
-import { join, dirname } from "path"
-
-/**
-* This function is used to resolve the absolute path of a package.
-* It is needed in projects that use Yarn PnP or are set up within a monorepo.
-*/
-function getAbsolutePath(value: string): string {
-  return dirname(require.resolve(join(value, 'package.json')))
-}
 const config: StorybookConfig = {
-  "stories": [
-    "../src/**/*.mdx",
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  stories: ["../src/**/*.stories.@(ts|tsx)", "../src/**/*.mdx"],
+
+  addons: [
+    "@storybook/addon-docs",
+    "@storybook/addon-a11y",
+    "@storybook/addon-vitest",
   ],
-  "addons": [
-    getAbsolutePath('@chromatic-com/storybook'),
-    getAbsolutePath('@storybook/addon-docs'),
-    getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-vitest")
-  ],
-  "framework": {
-    "name": getAbsolutePath('@storybook/react-vite'),
-    "options": {}
-  }
+
+  framework: {
+    name: "@storybook/react-vite",
+    options: {},
+  },
+
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
+    // tsconfigPath を省略 → デフォルト tsconfig を使用
+  },
+
+  viteFinal: async (cfg) => {
+    // "@/xxx" エイリアスが必要ならここだけ残す
+    cfg.resolve = cfg.resolve ?? {};
+    cfg.resolve.alias = {
+      ...(cfg.resolve.alias ?? {}),
+      "@": resolve(__dirname, "../src"),
+    };
+    return cfg;
+  },
 };
+
 export default config;

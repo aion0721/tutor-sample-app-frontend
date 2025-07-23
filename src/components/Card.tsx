@@ -1,8 +1,7 @@
-// src/components/CardComponent.tsx
 import { Card, Tag } from "@chakra-ui/react";
 import type { CardData } from "@/types";
 
-/* ★ カテゴリーごとに base / _dark の色を指定 */
+/* === カテゴリー定義 & 色マップ =============================== */
 type Category = NonNullable<CardData["category"]>;
 
 const bgByCategory: Record<Category, { base: string; _dark: string }> = {
@@ -13,22 +12,28 @@ const bgByCategory: Record<Category, { base: string; _dark: string }> = {
   other: { base: "gray.50", _dark: "gray.800" },
 };
 
+/* === Component ============================================= */
 export const CardComponent = ({
   title,
   description,
   category = "other",
   tags = [],
 }: CardData) => (
-  <Card.Root bg={bgByCategory[category]} w="250px" h="160px">
+  <Card.Root
+    bg={bgByCategory[category]} // ライト／ダーク自動切替✨
+    w="250px"
+    h="160px"
+    _hover={{ shadow: "md" }}
+  >
     <Card.Body>
       <Card.Title>{title}</Card.Title>
       <Card.Description>{description}</Card.Description>
     </Card.Body>
-    {/* タグがあればフッターを描画 */}
+
     {tags.length !== 0 && (
-      <Card.Footer>
+      <Card.Footer gap={2}>
         {tags.map((tag) => (
-          <Tag.Root key={tag}>
+          <Tag.Root key={tag} variant="solid" size="sm">
             <Tag.Label>{tag}</Tag.Label>
           </Tag.Root>
         ))}
