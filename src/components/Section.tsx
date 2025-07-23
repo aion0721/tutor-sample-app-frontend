@@ -3,72 +3,83 @@ import {
   Center,
   EmptyState,
   Heading,
+  Presence,
   Spinner,
   VStack,
 } from "@chakra-ui/react";
+import { TbCircleDotted } from "react-icons/tb";
 import CardGroup from "./CardGroup";
 import type { CardData } from "@/types";
-import { TbCircleDotted } from "react-icons/tb";
-import React from "react";
 
+/** FadeBox
+ * - show: 表示／非表示
+ * - overlay: true なら absolute で重ねる
+ */
+const FadeBox: React.FC<
+  React.PropsWithChildren<{ show: boolean; overlay?: boolean }>
+> = ({ show, overlay = false, children }) => (
+  <Presence
+    present={show}
+    animationName={{ _open: "fade-in", _closed: "fade-out" }}
+    animationDuration="slow"
+    style={overlay ? { position: "absolute", inset: 0 } : undefined}
+  >
+    {children}
+  </Presence>
+);
+
+/* 本体 ------------------------------------------------- */
 export type SectionProps = {
   title: string;
   items: CardData[] | null; // null = loading
 };
 
-const SectionFrame: React.FC<{ title: string; children?: React.ReactNode }> = ({
-  title,
-  children,
-}) => (
-  <Box
-    p={6}
-    borderWidth="1px"
-    borderColor="gray.300"
-    borderRadius="lg"
-    boxShadow="sm"
-  >
-    <Heading as="h2" size="lg" mb={4}>
-      {title}
-    </Heading>
+type SectionPhase = "loading" | "empty" | "data";
 
-    {children}
-  </Box>
-);
+const getPhase = (items: CardData[] | null): SectionPhase =>
+  items === null ? "loading" : items.length === 0 ? "empty" : "data";
 
 export const Section: React.FC<SectionProps> = ({ title, items }) => {
-  /* ─── Loading ─── */
-  if (items === null) {
-    return (
-      <SectionFrame title={title}>
-        <Center py={8}>
-          <Spinner size="lg" />
-        </Center>
-      </SectionFrame>
-    );
-  }
+  const phase = getPhase(items);
 
-  /* ─── Empty ─── */
-  if (items.length === 0) {
-    return (
-      <SectionFrame title={title}>
-        <EmptyState.Root>
-          <EmptyState.Content>
-            <EmptyState.Indicator>
-              <TbCircleDotted />
-            </EmptyState.Indicator>
-            <VStack textAlign="center">
-              <EmptyState.Title>Empty</EmptyState.Title>
-            </VStack>
-          </EmptyState.Content>
-        </EmptyState.Root>
-      </SectionFrame>
-    );
-  }
-
-  /* ─── Data ─── */
   return (
-    <SectionFrame title={title}>
-      <CardGroup items={items} />
-    </SectionFrame>
+    <Box
+      p={6}
+      borderWidth="1px"
+      borderColor="gray.300"
+      rounded="lg"
+      shadow="sm"
+    >
+      <Heading as="h2" size="lg">
+        {title}
+      </Heading>
+
+      <Box position="relative" minH="150px">
+        <FadeBox show={phase === "data"}>
+          <CardGroup items={items ?? []} />
+        </FadeBox>
+
+        <FadeBox show={phase === "loading"} overlay>
+          <Center py={8} h="full">
+            <Spinner size="lg" />
+          </Center>
+        </FadeBox>
+
+        <FadeBox show={phase === "empty"} overlay>
+          <Center h="full">
+            <EmptyState.Root>
+              <EmptyState.Content>
+                <EmptyState.Indicator>
+                  <TbCircleDotted />
+                </EmptyState.Indicator>
+                <VStack textAlign="center">
+                  <EmptyState.Title>No data</EmptyState.Title>
+                </VStack>
+              </EmptyState.Content>
+            </EmptyState.Root>
+          </Center>
+        </FadeBox>
+      </Box>
+    </Box>
   );
 };

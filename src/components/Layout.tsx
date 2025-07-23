@@ -35,7 +35,7 @@ export const Layout = ({ children }: LayoutProps) => {
         left="0"
         right="0"
         height={HEADER_HEIGHT}
-        background="cyan"
+        bg={{ base: "cyan.100", _dark: "cyan.600" }}
         px={4}
         display="flex"
         alignItems="center"
@@ -77,7 +77,6 @@ export const Layout = ({ children }: LayoutProps) => {
         minHeight="100vh"
         pt={HEADER_HEIGHT}
         pb={FOOTER_HEIGHT}
-        bg="gray.50"
       >
         <Container maxW="container.md" py={4}>
           {children}
@@ -92,7 +91,7 @@ export const Layout = ({ children }: LayoutProps) => {
         left="0"
         right="0"
         height={FOOTER_HEIGHT}
-        bg="gray.800"
+        bg={{ base: "gray.200", _dark: "gray.800" }}
         px={4}
         display="flex"
         alignItems="center"

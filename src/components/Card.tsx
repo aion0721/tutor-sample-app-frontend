@@ -8,7 +8,6 @@ type CardProps = {
 
 export const CardComponent = ({ title, description }: CardProps) => (
   <Box
-    bg="white"
     p={4}
     borderRadius="md"
     boxShadow="sm"
@@ -21,8 +20,6 @@ export const CardComponent = ({ title, description }: CardProps) => (
     <Heading as="h4" size="md" mb={2}>
       {title}
     </Heading>
-    <Text fontSize="sm" color="gray.600">
-      {description}
-    </Text>
+    <Text fontSize="sm">{description}</Text>
   </Box>
 );
