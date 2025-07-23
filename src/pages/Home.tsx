@@ -1,20 +1,26 @@
 // src/pages/Home.tsx
-import { Box, Heading, VStack } from "@chakra-ui/react";
+import { Box, Heading, VStack, Spinner, Center } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
 import CardGroup from "@/components/CardGroup";
 import { useEffect, useState } from "react";
 import { fetchHomeData, type HomeData } from "@/mocks/home";
 
 export const Home = () => {
-  const [data, setData] = useState<HomeData>({
-    notify: [],
-    open: [],
-    history: [],
-  });
+  const [data, setData] = useState<HomeData | null>(null);
 
   useEffect(() => {
     fetchHomeData().then(setData);
   }, []);
+
+  if (!data) {
+    return (
+      <Layout>
+        <Center py={10}>
+          <Spinner size="xl" />
+        </Center>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

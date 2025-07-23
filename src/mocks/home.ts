@@ -36,4 +36,7 @@ const mockHomeData: HomeData = {
   history: [],
 };
 
-export const fetchHomeData = async (): Promise<HomeData> => mockHomeData;
+export const fetchHomeData = async (): Promise<HomeData> =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(mockHomeData), 5000);
+  });
