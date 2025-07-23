@@ -1,7 +1,7 @@
 // src/pages/Home.tsx
-import { Box, Heading, SimpleGrid, VStack } from "@chakra-ui/react";
+import { Box, Heading, VStack } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
-import { CardComponent } from "@/components/Card";
+import { PaginatedGrid } from "@/components/PaginatedGrid";
 
 const dummyData = {
   notify: [
@@ -29,17 +29,7 @@ export const Home = () => (
         <Heading as="h2" size="lg" mb={4}>
           お知らせ
         </Heading>
-        <Box overflowX="auto">
-          <SimpleGrid
-            gap={4}
-            gridAutoFlow="column"
-            gridAutoColumns="200px"
-          >
-            {dummyData.notify.map((item, index) => (
-              <CardComponent key={index} {...item} />
-            ))}
-          </SimpleGrid>
-        </Box>
+        <PaginatedGrid items={dummyData.notify} />
       </Box>
 
       {/* 募集中 */}
@@ -47,13 +37,7 @@ export const Home = () => (
         <Heading as="h2" size="lg" mb={4}>
           募集中
         </Heading>
-        <Box overflowX="auto">
-          <SimpleGrid gap={4} gridAutoFlow="column" gridAutoColumns="200px">
-            {dummyData.open.map((item, index) => (
-              <CardComponent key={index} {...item} />
-            ))}
-          </SimpleGrid>
-        </Box>
+        <PaginatedGrid items={dummyData.open} />
       </Box>
 
       {/* 受講済 */}
@@ -61,13 +45,7 @@ export const Home = () => (
         <Heading as="h2" size="lg" mb={4}>
           受講済
         </Heading>
-        <Box overflowX="auto">
-          <SimpleGrid gap={4} gridAutoFlow="column" gridAutoColumns="200px">
-            {dummyData.history.map((item, index) => (
-              <CardComponent key={index} {...item} />
-            ))}
-          </SimpleGrid>
-        </Box>
+        <PaginatedGrid items={dummyData.history} />
       </Box>
     </VStack>
   </Layout>
