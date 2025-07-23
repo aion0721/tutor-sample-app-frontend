@@ -2,17 +2,26 @@
 import { Box, Heading, VStack, Spinner, Center } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
 import CardGroup from "@/components/CardGroup";
+import type { CardData } from "@/components/CardGroup";
 import { useEffect, useState } from "react";
-import { fetchHomeData, type HomeData } from "@/mocks/home";
+import {
+  fetchNotifyData,
+  fetchOpenData,
+  fetchHistoryData,
+} from "@/mocks/home";
 
 export const Home = () => {
-  const [data, setData] = useState<HomeData | null>(null);
+  const [notify, setNotify] = useState<CardData[] | null>(null);
+  const [open, setOpen] = useState<CardData[] | null>(null);
+  const [history, setHistory] = useState<CardData[] | null>(null);
 
   useEffect(() => {
-    fetchHomeData().then(setData);
+    fetchNotifyData().then(setNotify);
+    fetchOpenData().then(setOpen);
+    fetchHistoryData().then(setHistory);
   }, []);
 
-  if (!data) {
+  if (!notify || !open || !history) {
     return (
       <Layout>
         <Center py={10}>
@@ -30,7 +39,7 @@ export const Home = () => {
         <Heading as="h2" size="lg" mb={4}>
           お知らせ
         </Heading>
-        <CardGroup items={data.notify} />
+        <CardGroup items={notify} />
       </Box>
 
       {/* 募集中 */}
@@ -38,7 +47,7 @@ export const Home = () => {
         <Heading as="h2" size="lg" mb={4}>
           募集中
         </Heading>
-        <CardGroup items={data.open} />
+        <CardGroup items={open} />
       </Box>
 
       {/* 受講済 */}
@@ -46,7 +55,7 @@ export const Home = () => {
         <Heading as="h2" size="lg" mb={4}>
           受講済
         </Heading>
-        <CardGroup items={data.history} />
+        <CardGroup items={history} />
       </Box>
     </VStack>
   </Layout>
