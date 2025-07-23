@@ -1,5 +1,4 @@
 import { VStack } from "@chakra-ui/react";
-import { Layout } from "../components/Layout";
 import type { CardData } from "@/types";
 import { useEffect, useState } from "react";
 import { fetchNotifyData, fetchOpenData, fetchHistoryData } from "@/mocks/home";
