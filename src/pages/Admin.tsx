@@ -11,36 +11,24 @@ import {
 import { Link as RouterLink } from "react-router";
 import { FaAngleRight } from "react-icons/fa6";
 
-/* ① 共通プロップを 1 か所で宣言 */
-const cardProps = {
-  cursor: "pointer",
-  transition: "all 0.15s ease",
-  _hover: {
-    shadow: "md",
-    bg: "gray.50",
-    transform: "translateY(-2px)",
-  },
-};
-
-/* ② ぜんぶ配列で管理（セクションごとに分けても OK） */
 const sections = [
   {
-    title: "お知らせ",
+    title: "お知らせ📢",
     items: [
-      { label: "新規追加", to: "/admin/notify/new" },
-      { label: "変更", to: "/admin/notify/edit" },
+      { label: "新規追加🆕", to: "/admin/notify/new" },
+      { label: "お知らせ一覧📘", to: "/admin/notify/edit" },
     ],
   },
   {
-    title: "研修管理",
+    title: "研修管理🎓",
     items: [
-      { label: "研修一覧", to: "/admin/training" },
-      { label: "新規追加", to: "/admin/training/new" },
+      { label: "新規追加🆕", to: "/admin/training/new" },
+      { label: "研修一覧📘", to: "/admin/training" },
     ],
   },
   {
-    title: "受講履歴",
-    items: [{ label: "履歴一覧", to: "/admin/history" }],
+    title: "受講履歴📖",
+    items: [{ label: "履歴一覧📘", to: "/admin/history" }],
   },
 ];
 
@@ -67,9 +55,13 @@ export const Admin = () => (
             <RouterLink to={to}>
               <Card.Root
                 key={to}
-                as={RouterLink} /* ③ 外側ラッパー不要！ */
                 size="sm"
-                {...cardProps}
+                _hover={{
+                  shadow: "md",
+                  bg: "gray.50",
+                  transform: "translateY(-2px)",
+                }}
+                transition="all 0.15s ease"
               >
                 <Card.Body>
                   <HStack>
