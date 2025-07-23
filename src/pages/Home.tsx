@@ -17,12 +17,10 @@ export const Home = () => {
   }, []);
 
   return (
-    <Layout>
-      <VStack align="stretch" gap={4}>
-        <Section title="お知らせ" items={notify} />
-        <Section title="募集中" items={open} />
-        <Section title="受講済" items={history} />
-      </VStack>
-    </Layout>
+    <VStack align="stretch" gap={4}>
+      <Section title="お知らせ" items={notify} />
+      <Section title="募集中" items={open} />
+      <Section title="受講済" items={history} />
+    </VStack>
   );
 };

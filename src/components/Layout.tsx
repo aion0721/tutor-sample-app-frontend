@@ -10,20 +10,15 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import type { ReactNode } from "react";
-import { FaGear, FaRegCircleUser } from "react-icons/fa6";
-import { Link as RouterLink } from "react-router";
+import { FaGear, FaHouse, FaRegCircleUser } from "react-icons/fa6";
+import { Outlet, Link as RouterLink } from "react-router";
 import { useColorMode } from "./ui/color-mode";
 import { LuMoon, LuSun } from "react-icons/lu";
 
 const HEADER_HEIGHT = "64px";
 const FOOTER_HEIGHT = "56px";
 
-type LayoutProps = {
-  children: ReactNode;
-};
-
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = () => {
   const { toggleColorMode, colorMode } = useColorMode();
   return (
     <>
@@ -53,6 +48,11 @@ export const Layout = ({ children }: LayoutProps) => {
         <Spacer />
         <HStack gap={4}>
           <Text>Welcome! uknown user</Text>
+          <RouterLink to="/">
+            <IconButton aria-label="Home page" variant="ghost">
+              <FaHouse />
+            </IconButton>
+          </RouterLink>
           <RouterLink to="/account">
             <IconButton aria-label="Account page" variant="ghost">
               <FaRegCircleUser />
@@ -79,7 +79,7 @@ export const Layout = ({ children }: LayoutProps) => {
         pb={FOOTER_HEIGHT}
       >
         <Container maxW="container.md" py={4}>
-          {children}
+          <Outlet />
         </Container>
       </Flex>
 
