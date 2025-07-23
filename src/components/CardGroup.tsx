@@ -4,6 +4,7 @@ import {
   HStack,
   IconButton,
   Pagination,
+  Spinner,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -18,10 +19,13 @@ export type CardData = {
   description: string;
 };
 type SampleGridProps = {
-  items: CardData[];
+  items: CardData[] | null;
 };
 
 const SampleGrid = ({ items }: SampleGridProps) => {
+  if (!items) {
+    return <Spinner size="xl" />;
+  }
   const [page, setPage] = useState(1);
 
   const startRange = (page - 1) * pageSize;
