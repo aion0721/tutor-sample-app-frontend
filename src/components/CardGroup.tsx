@@ -13,7 +13,7 @@ import { TbCircleDotted } from "react-icons/tb";
 
 const pageSize = 5;
 
-type CardData = {
+export type CardData = {
   title: string;
   description: string;
 };
