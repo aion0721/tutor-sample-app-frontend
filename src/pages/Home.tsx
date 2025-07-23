@@ -29,11 +29,17 @@ export const Home = () => (
         <Heading as="h2" size="lg" mb={4}>
           お知らせ
         </Heading>
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-          {dummyData.notify.map((item, index) => (
-            <CardComponent key={index} {...item} />
-          ))}
-        </SimpleGrid>
+        <Box overflowX="auto">
+          <SimpleGrid
+            gap={4}
+            gridAutoFlow="column"
+            gridAutoColumns="200px"
+          >
+            {dummyData.notify.map((item, index) => (
+              <CardComponent key={index} {...item} />
+            ))}
+          </SimpleGrid>
+        </Box>
       </Box>
 
       {/* 募集中 */}
@@ -41,11 +47,13 @@ export const Home = () => (
         <Heading as="h2" size="lg" mb={4}>
           募集中
         </Heading>
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-          {dummyData.open.map((item, index) => (
-            <CardComponent key={index} {...item} />
-          ))}
-        </SimpleGrid>
+        <Box overflowX="auto">
+          <SimpleGrid gap={4} gridAutoFlow="column" gridAutoColumns="200px">
+            {dummyData.open.map((item, index) => (
+              <CardComponent key={index} {...item} />
+            ))}
+          </SimpleGrid>
+        </Box>
       </Box>
 
       {/* 受講済 */}
@@ -53,11 +61,13 @@ export const Home = () => (
         <Heading as="h2" size="lg" mb={4}>
           受講済
         </Heading>
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-          {dummyData.history.map((item, index) => (
-            <CardComponent key={index} {...item} />
-          ))}
-        </SimpleGrid>
+        <Box overflowX="auto">
+          <SimpleGrid gap={4} gridAutoFlow="column" gridAutoColumns="200px">
+            {dummyData.history.map((item, index) => (
+              <CardComponent key={index} {...item} />
+            ))}
+          </SimpleGrid>
+        </Box>
       </Box>
     </VStack>
   </Layout>

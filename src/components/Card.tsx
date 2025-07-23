@@ -14,6 +14,8 @@ export const CardComponent = ({ title, description }: CardProps) => (
     boxShadow="sm"
     border="1px solid"
     borderColor="gray.200"
+    w="200px"
+    h="160px"
     _hover={{ boxShadow: "md" }}
   >
     <Heading as="h4" size="md" mb={2}>
