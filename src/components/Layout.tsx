@@ -1,6 +1,20 @@
 // src/components/Layout.tsx
-import { Box, Container, Flex, Heading, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  HStack,
+  IconButton,
+  Image,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import type { ReactNode } from "react";
+import { FaGear, FaRegCircleUser } from "react-icons/fa6";
+import { Link as RouterLink } from "react-router";
+import { useColorMode } from "./ui/color-mode";
+import { LuMoon, LuSun } from "react-icons/lu";
 
 const HEADER_HEIGHT = "64px";
 const FOOTER_HEIGHT = "56px";
@@ -10,6 +24,7 @@ type LayoutProps = {
 };
 
 export const Layout = ({ children }: LayoutProps) => {
+  const { toggleColorMode, colorMode } = useColorMode();
   return (
     <>
       {/* ヘッダー */}
@@ -20,8 +35,7 @@ export const Layout = ({ children }: LayoutProps) => {
         left="0"
         right="0"
         height={HEADER_HEIGHT}
-        bg="blue.600"
-        color="white"
+        background="cyan"
         px={4}
         display="flex"
         alignItems="center"
@@ -36,6 +50,24 @@ export const Layout = ({ children }: LayoutProps) => {
           objectFit="contain" // はみ出し防止＆いい感じに収める
         />
         <Heading>研修管理ポータル</Heading>
+        <Spacer />
+        <HStack gap={4}>
+          <Text>Welcome! uknown user</Text>
+          <RouterLink to="/account">
+            <IconButton aria-label="Account page" variant="ghost">
+              <FaRegCircleUser />
+            </IconButton>
+          </RouterLink>
+
+          <RouterLink to="/admin">
+            <IconButton aria-label="Admin page" variant="ghost">
+              <FaGear />
+            </IconButton>
+          </RouterLink>
+          <IconButton onClick={toggleColorMode} variant="ghost">
+            {colorMode === "light" ? <LuSun /> : <LuMoon />}
+          </IconButton>
+        </HStack>
       </Box>
 
       {/* メインコンテンツ */}
@@ -61,7 +93,6 @@ export const Layout = ({ children }: LayoutProps) => {
         right="0"
         height={FOOTER_HEIGHT}
         bg="gray.800"
-        color="white"
         px={4}
         display="flex"
         alignItems="center"
@@ -69,7 +100,7 @@ export const Layout = ({ children }: LayoutProps) => {
         zIndex="sticky"
         boxShadow="sm"
       >
-        aion all rights reservred.
+        © Aion. All rights reserved.
       </Box>
     </>
   );

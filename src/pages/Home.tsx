@@ -3,7 +3,7 @@ import { Layout } from "../components/Layout";
 import type { CardData } from "@/types";
 import { useEffect, useState } from "react";
 import { fetchNotifyData, fetchOpenData, fetchHistoryData } from "@/mocks/home";
-import { Section } from "@/components/Secrion";
+import { Section } from "@/components/Section";
 
 export const Home = () => {
   const [notify, setNotify] = useState<CardData[] | null>(null);

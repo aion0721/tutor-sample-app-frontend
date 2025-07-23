@@ -25,7 +25,6 @@ const SectionFrame: React.FC<{ title: string; children?: React.ReactNode }> = ({
     borderWidth="1px"
     borderColor="gray.300"
     borderRadius="lg"
-    bg="white"
     boxShadow="sm"
   >
     <Heading as="h2" size="lg" mb={4}>

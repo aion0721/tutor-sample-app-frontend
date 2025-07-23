@@ -12,11 +12,11 @@ import type { CardData } from "@/types";
 
 const pageSize = 5;
 
-type SampleGridProps = {
+type CardGroupProps = {
   items: CardData[];
 };
 
-const SampleGrid = ({ items }: SampleGridProps) => {
+const CardGroup = ({ items }: CardGroupProps) => {
   const [page, setPage] = useState(1);
 
   const startRange = (page - 1) * pageSize;
@@ -63,4 +63,4 @@ const SampleGrid = ({ items }: SampleGridProps) => {
   );
 };
 
-export default SampleGrid;
+export default CardGroup;
