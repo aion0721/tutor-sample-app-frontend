@@ -1,19 +1,14 @@
 import type { CardData } from "@/components/CardGroup";
 
-export type HomeData = {
-  notify: CardData[];
-  open: CardData[];
-  history: CardData[];
-};
-
-const mockHomeData: HomeData = {
-  notify: [
+// モックデータ
+const notifyData: CardData[] = [
     {
       title: "メンテナンスのお知らせ",
       description: "7/25 22:00〜システム停止します",
     },
-  ],
-  open: [
+];
+
+const openData: CardData[] = [
     { title: "React研修", description: "8/1 開始予定。基本から学べます" },
     { title: "Kubernetes入門", description: "応募受付中！" },
     { title: "Dockerハンズオン", description: "コンテナ基礎を学ぼう" },
@@ -32,11 +27,21 @@ const mockHomeData: HomeData = {
       title: "マイクロサービス設計",
       description: "分割統治のベストプラクティス",
     },
-  ],
-  history: [],
-};
+];
 
-export const fetchHomeData = async (): Promise<HomeData> =>
+const historyData: CardData[] = [];
+
+export const fetchNotifyData = async (): Promise<CardData[]> =>
   new Promise((resolve) => {
-    setTimeout(() => resolve(mockHomeData), 5000);
+    setTimeout(() => resolve(notifyData), 500);
+  });
+
+export const fetchOpenData = async (): Promise<CardData[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(openData), 500);
+  });
+
+export const fetchHistoryData = async (): Promise<CardData[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(historyData), 500);
   });
