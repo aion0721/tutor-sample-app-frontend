@@ -1,4 +1,1 @@
-{
-  "apiBaseUrl": "http://loaclhost/open",
-  "mockDefault": true
-}
+{ "apiBaseUrl": "", "mockDefault": true }

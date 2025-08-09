@@ -16,26 +16,28 @@ async function bootstrap() {
       onUnhandledRequest: "bypass",
     });
   }
-}
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Provider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </StrictMode>
-);
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <Provider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </StrictMode>
+  );
+}
 
 bootstrap();
 
 function shouldEnableMSW(cfg: { mockDefault?: boolean }) {
-  if (import.meta.env?.DEV) return true;
-
-  if (cfg?.mockDefault === true) return true;
   const u = new URL(location.href);
   if (u.searchParams.get("mock") === "1") return true;
   if (localStorage.getItem("mock") === "1") return true;
-  return false;
+
+  if (u.searchParams.get("mock") === "0") return false;
+  if (localStorage.getItem("mock") === "0") return false;
+
+  if (typeof cfg.mockDefault === "boolean") return cfg.mockDefault;
+  return !!import.meta.env?.DEV; // ← devでも既定ONにしたくなければ false にしてOK
 }

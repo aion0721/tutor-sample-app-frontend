@@ -1,7 +1,7 @@
 import { VStack } from "@chakra-ui/react";
 import type { CardData } from "@/types";
 import { useEffect, useState } from "react";
-import { fetchNotifyData, fetchOpenData, fetchHistoryData } from "@/mocks/home";
+import { fetchNotifyData, fetchOpenData, fetchHistoryData } from "@/api/home";
 import { Section } from "@/components/Section";
 
 export const Home = () => {
