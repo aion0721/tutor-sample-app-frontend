@@ -1,14 +1,14 @@
 import type { CardData } from "@/types";
 
 // モックデータ
-const notifyData: CardData[] = [
+export const notifyData: CardData[] = [
   {
     title: "メンテナンスのお知らせ",
     description: "7/25 22:00〜システム停止します",
   },
 ];
 
-const openData: CardData[] = [
+export const openData: CardData[] = [
   {
     title: "React研修",
     description: "8/1 開始予定。基本から学べます",
@@ -76,7 +76,7 @@ const openData: CardData[] = [
   },
 ];
 
-const historyData: CardData[] = [];
+export const historyData: CardData[] = [];
 
 export const fetchNotifyData = async (): Promise<CardData[]> =>
   new Promise((resolve) => {
